@@ -111,7 +111,7 @@ Go to the original repository on GitHub and open a pull request from your branch
 
 ## Code of Conduct
 
-We follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/) to foster an open and welcoming environment. Please review it before contributing.
+We follow the [Contributor Covenant Code of Conduct]([https://www.contributor-covenant.org/](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md)) to foster an open and welcoming environment. Please review it before contributing.
 
 ---
 
