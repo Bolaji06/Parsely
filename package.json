@@ -1,0 +1,23 @@
+{
+  "name": "parsely",
+  "version": "1.0.0",
+  "description": "Parsely: Document Parser",
+  "keywords": [
+    "document",
+    "parser"
+  ],
+  "license": "ISC",
+  "author": "Bj.dev",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mammoth": "^1.9.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
+    "tesseract.js": "^6.0.0",
+    "xlsx": "^0.18.5"
+  }
+}
