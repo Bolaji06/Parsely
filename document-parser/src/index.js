@@ -1,5 +1,8 @@
+import PDFParser from "../src/parsers/pdfParser.js";
 
-export function add(a, b){
+(async function main() {
+  const pdfParser = new PDFParser(null);
+  const pdfResult = await pdfParser.parse();
 
-    return a + b;
-}
+  return pdfResult;
+})();
