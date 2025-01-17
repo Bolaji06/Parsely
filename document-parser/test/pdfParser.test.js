@@ -1,5 +1,4 @@
 import path from "path";
-import { join } from "path";
 import PDFParser from "../src/parsers/pdfParser";
 
 describe("PDFParser class", () => {
