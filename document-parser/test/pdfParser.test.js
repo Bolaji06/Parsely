@@ -1,8 +1,9 @@
 import path from "path";
+import { join } from "path";
 import PDFParser from "../src/parsers/pdfParser";
 
 describe("PDFParser class", () => {
-  const samplePDF = path.resolve("sample.pdf");
+  const samplePDF = path.resolve("../sample/sample.pdf");
   test("should parse text and metadata from a valid pdf files", async () => {
     const parser = new PDFParser(samplePDF);
     const result = await parser.parse();
