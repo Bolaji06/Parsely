@@ -1,4 +1,7 @@
 import { getDocument } from "pdfjs-dist";
+//import pdfjsWorker from "pdfjs-dist/build/pdf.worker.mjs";
+
+//pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 class PDFParser {
   constructor(filePath) {
@@ -9,17 +12,23 @@ class PDFParser {
   }
 
   /**
+   * @async
    * Extracts and formats text and tables (if present) from a PDF.
+   * @param {Array<number>|null} pageRange - Number of page to parse. e.g parse([2, 3])
    * @returns {Promise<object>} - Object: metadata and formatted text.
    */
-  async parse() {
+  async parse(pageRange = null) {
     try {
       const pdf = await getDocument(this.filePath).promise;
       const totalPages = pdf.numPages;
       let formattedOutput = "";
       const { info } = await pdf.getMetadata();
 
-      for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+      const pagesToProcess = pageRange
+        ? pageRange.filter((page) => page >= 1 && page <= totalPages)
+        : Array.from({ length: totalPages }, (_, i) => i + 1);
+
+      for (const pageNumber of pagesToProcess) {
         const page = await pdf.getPage(pageNumber);
         const textContent = await page.getTextContent();
 
@@ -45,7 +54,7 @@ class PDFParser {
         text: formattedOutput,
       };
     } catch (error) {
-      throw new Error("Error parsing PDF: Missing PDF file");
+      throw new Error("Error parsing PDF: Missing PDF file " + error.message);
     }
   }
 
@@ -108,6 +117,48 @@ class PDFParser {
   #isNewLine(currentItem, nextItem) {
     return nextItem && currentItem.transform[5] !== nextItem.transform[5];
   }
-}
 
+  /**
+   * Converts parse PDF contents to JSON
+   * @param {String} content - Parsed PDF contents
+   * @returns {String} - Parsed document
+   */
+  json(content) {
+    return JSON.stringify(content, null, 0);
+  }
+
+  /**
+   * Converts parsed document to markdown format
+   * @param {string} - Parsed text content
+   * @returns {String} - The PDF content in Markdown format.
+   */
+  markdown(content) {
+    let markdownText = "";
+    if (this.#isHeading) {
+      markdownText += `### ${content} \n`;
+    }
+    if (this.#isListItem) {
+      markdownText += `- ${content} \n`;
+    }
+    return markdownText.trim();
+  }
+
+  /**
+   * Determines if a line is a heading.
+   * @param {string} text - The text to analyze.
+   * @returns {boolean} - True if the text is a heading.
+   */
+  #isHeading(text) {
+    return text.match(/^[A-Z][A-Z\s]+$/); // Example: All uppercase text as a heading
+  }
+
+  /**
+   * Determines if a line is a list item.
+   * @param {string} text - The text to analyze.
+   * @returns {boolean} - True if the text looks like a list item.
+   */
+  #isListItem(text) {
+    return text.match(/^[-*•]\s.+/); // Example: Starts with bullet points
+  }
+}
 export default PDFParser;
