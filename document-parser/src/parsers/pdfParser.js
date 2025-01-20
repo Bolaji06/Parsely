@@ -1,8 +1,8 @@
 import { getDocument } from "pdfjs-dist";
-//import pdfjsWorker from "pdfjs-dist/build/pdf.worker.mjs";
 
-//pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
+/**
+ * PDFParser parses pdf file to a text format
+ */
 class PDFParser {
   constructor(filePath) {
     if (!filePath) {
