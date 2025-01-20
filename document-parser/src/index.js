@@ -1,11 +1,10 @@
 import PDFParser from "./parsers/pdfParser.js";
+import DocxParser from "./parsers/docxParser.js";
 
 (async function main(){
-  const pdfParser = new PDFParser("../sample/sample.pdf");
-  const parser = await pdfParser.parse([1]);
-  //console.log(pdfParser.json(parser.text));
-  console.log(pdfParser.markdown(parser.text))
-
+  const wordParser = new DocxParser("../sample/resume.docx");
+  const result = await wordParser.parser();
+  console.log(result);
 
 })().catch(error => console.log(error))
-//export { PDFParser }
+export { PDFParser, DocxParser }
