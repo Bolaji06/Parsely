@@ -1,14 +1,30 @@
 import { getDocument } from "pdfjs-dist";
 
 /**
- * PDFParser parses pdf file to a text format
+ * Class PDFParser parses pdf file to a text format
  */
 class PDFParser {
+
+   /**
+   * file path of a pdf file to parse (private)
+   * @type {string}
+   */
+  #filePath
+
+  
+  /**
+   * Creates an instance of PDFParser.
+   * @param {string} filePath - The file path of the pdf to be parsed.
+   * @throws {Error} Throws an error if no file path is provided during initialization.
+   */
   constructor(filePath) {
     if (!filePath) {
       throw new Error("File path is required to initialize the PDFParser.");
     }
-    this.filePath = filePath;
+    /**
+     * @type {string}
+     */
+    this.#filePath = filePath;
   }
 
   /**
@@ -17,9 +33,9 @@ class PDFParser {
    * @param {Array<number>|null} pageRange - Number of page to parse. e.g parse([2, 3])
    * @returns {Promise<object>} - Object: metadata and formatted text.
    */
-  async parse(pageRange = null) {
+  async parser(pageRange = null) {
     try {
-      const pdf = await getDocument(this.filePath).promise;
+      const pdf = await getDocument(this.#filePath).promise;
       const totalPages = pdf.numPages;
       let formattedOutput = "";
       const { info } = await pdf.getMetadata();
