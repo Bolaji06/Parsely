@@ -11,12 +11,10 @@ class XlsxParser {
   async parser() {
     try {
       const buf = readFileSync(this.filePath);
-      //const textContent = buf.toString()
       const workbook = XLSX.read(buf);
       const sheets = workbook.Sheets;
       const sheetNames = workbook.SheetNames;
 
-      //return XLSX.utils.sheet_to_txt(sheets['Form Responses 1'])
 
       return sheetNames.map((sheet) => {
         const rawText = XLSX.utils.sheet_to_txt(sheets[sheet]);
