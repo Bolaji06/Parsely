@@ -1,15 +1,24 @@
 {
-  "name": "parsely",
-  "version": "1.0.0",
-  "description": "Parsely: Document Parser",
+  "name": "@bj.dev/parsely",
+  "version": "1.0.3",
+  "description": "Parsely: Is a lightweight JavaScript library for parsing various types of documents and web pages. It provides easy-to-use parsers for extracting and processing data from PDFs, Word documents, Excel spreadsheets, and web pages.",
   "keywords": [
     "document",
-    "parser"
+    "parser",
+    "document parser",
+    "parse word documents",
+    "parse worksheets",
+    "parse web pages",
+    "parse pdf"
   ],
   "license": "ISC",
   "author": "Bj.dev",
   "type": "module",
-  "main": "index.js",
+  "main": "./parsely/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bolaji06/Parsely"
+  },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },

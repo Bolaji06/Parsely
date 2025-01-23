@@ -4,11 +4,10 @@ import mammoth from "mammoth";
  * DocxParser class: Parses Word documents
  */
 class DocxParser {
-
   /**
    * @type {string} Docx file path (private)
    */
-  #filePath
+  #filePath;
 
   /**
    * Creates an instance of DocxParser.
@@ -30,7 +29,7 @@ class DocxParser {
       const parse = await mammoth.extractRawText({ path: this.#filePath });
       return parse.value;
     } catch (error) {
-        throw new Error("Error parsing document: " + error.message);
+      throw new Error("Error parsing document: " + error.message);
     }
   }
 }
