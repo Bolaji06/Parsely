@@ -1,16 +1,16 @@
-# Parsely: The Ultimate Document Parser
+# Parsely
 
-**Parsely** is a versatile JavaScript library designed to parse and structure data from various document types, including PDFs, Word files, spreadsheets, and images. This library is tailored to help developers extract meaningful, well-structured data for AI models and data processing workflows.
+**Parsely** is a lightweight JavaScript library for parsing various types of documents and web pages. It provides easy-to-use parsers for extracting and processing data from PDFs, Word documents, Excel spreadsheets, and web pages.
 
 ---
 
 ## Features
 
-- Parse text content from PDFs, Word documents, and spreadsheets.
-- Extract tabular data and metadata.
-- Perform OCR (Optical Character Recognition) on images.
-- Modular and extensible design.
-- Works in both Node.js and browser environments.
+- Parse **PDF** documents and extract text, tables, and metadata.
+- Parse **Word (DOCX)** documents to extract raw text.
+- Parse **Excel (XLSX)** files to extract data from sheets.
+- Parse **Web Pages** to extract HTML content and metadata.
+- Lightweight and modular design, allowing you to use only the parsers you need.
 
 ---
 
@@ -19,105 +19,109 @@
 Install Parsely via npm:
 
 ```bash
-npm install parsely
+npm install "@bj.dev/parsely"
 ```
 
 ---
 
-## Quick Start
+## Usage
 
-Here’s an example of how to parse a PDF file:
+### Importing Parsers
 
 ```javascript
-const PDFParser = require('parsely');
+import { PDFParser, DocxParser, XlsxParser, WebParser } from "@bj.dev/parsely";
+```
+
+### Parsing a PDF Document
+
+```javascript
+const pdfParser = new PDFParser("path/to/document.pdf");
 
 (async () => {
-  const parsedData = await PDFParser.parse('./sample.pdf');
-  console.log(JSON.stringify(parsedData, null, 2));
+  const result = await pdfParser.parse();
+  console.log(result);
+})();
+```
+
+### Parsing a Word Document
+
+```javascript
+const docxParser = new DocxParser("path/to/document.docx");
+
+(async () => {
+  const text = await docxParser.parse();
+  console.log(text);
+})();
+```
+
+### Parsing an Excel Spreadsheet
+
+```javascript
+const xlsxParser = new XlsxParser("path/to/spreadsheet.xlsx");
+
+(async () => {
+  const data = await xlsxParser.parse();
+  console.log(data);
+})();
+```
+
+### Parsing a Web Page
+
+```javascript
+const webParser = new WebParser("https://example.com");
+
+(async () => {
+  const html = await webParser.parse();
+  console.log(html);
 })();
 ```
 
 ---
 
-## Supported Document Types
+## API Reference
 
-- **PDF**: Extract text and tabular data.
-- **Word Documents**: (.docx) Extract clean, structured text.
-- **Spreadsheets**: (.xlsx, .csv) Parse tabular data.
-- **Images**: Perform OCR to extract text.
+### PDFParser
+
+- **Constructor**: `new PDFParser(filePath)`
+  - `filePath` (String): Path to the PDF file.
+- **Method**: `parse()`
+  - Returns a Promise resolving to an object with metadata and text content.
+
+### DocxParser
+
+- **Constructor**: `new DocxParser(filePath)`
+  - `filePath` (String): Path to the DOCX file.
+- **Method**: `parse()`
+  - Returns a Promise resolving to the raw text of the document.
+
+### XlsxParser
+
+- **Constructor**: `new XlsxParser(filePath)`
+  - `filePath` (String): Path to the XLSX file.
+- **Method**: `parse()`
+  - Returns a Promise resolving to an array of sheet data.
+
+### WebParser
+
+- **Constructor**: `new WebParser(webUrl)`
+  - `webUrl` (String): URL of the web page to parse.
+- **Method**: `parse()`
+  - Returns a Promise resolving to the HTML content of the page.
 
 ---
 
 ## Contributing
 
-We welcome contributions from the community! Follow these steps to contribute:
-
-### 1. Fork the Repository
-
-Click the "Fork" button on the top-right corner of this repository to create a copy under your GitHub account.
-
-### 2. Clone the Repository
-
-Clone your forked repository to your local machine:
-
-```bash
-git clone https://github.com/your-username/parsely-document-parser.git
-cd document-parser
-```
-
-### 3. Install Dependencies
-
-Install the required dependencies to set up the project:
-
-```bash
-npm install
-```
-
-### 4. Create a Branch
-
-Create a new branch for your feature or bug fix:
-
-```bash
-git checkout -b feature-name
-```
-
-### 5. Make Changes
-
-Implement your changes and add tests if necessary. Ensure your code adheres to the existing code style and conventions.
-
-### 6. Test Your Changes
-
-Run the test suite to verify your changes:
-
-```bash
-npm test
-```
-
-### 7. Commit and Push
-
-Commit your changes with a meaningful message:
-
-```bash
-git add .
-git commit -m "Add feature: description of the feature"
-git push origin feature-name
-```
-
-### 8. Open a Pull Request
-
-Go to the original repository on GitHub and open a pull request from your branch. Include a clear description of the changes you’ve made and any relevant context.
-
----
-
-## Code of Conduct
-
-We follow the [Contributor Covenant Code of Conduct]([https://www.contributor-covenant.org/](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md)) to foster an open and welcoming environment. Please review it before contributing.
+Contributions are welcome! If you encounter bugs or have feature requests, please open an issue or submit a pull request on [GitHub](https://github.com/Bolaji06/Parsely).
 
 ---
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](https://opensource.org/license/bsd-2-clause) file for details.
 
+---
 
+## Author
 
+Created by Bolaji Bolajoko.
